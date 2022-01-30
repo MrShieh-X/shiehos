@@ -40,4 +40,5 @@ POINT getPosition(char c);
 int initVideo(BootConfig *BootConfig);
 int DrawPixel(PIXEL Pixel);
 int DrawBlock(BLOCK Block);
+//int DrawLetter(UINT8 c, POINT dest);
 int DrawLetter(char c, POINT dest);

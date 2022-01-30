@@ -11,4 +11,4 @@
     UINTN y;
 }Position;
 */
-POINT getPosition(char c);
+//POINT getPosition(char c);

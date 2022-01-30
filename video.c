@@ -3,15 +3,15 @@
 VideoConfig *videoConfig;
 UINT32 *videoStart;
 
-BMPConfig *asciiConfig;
-UINT32 *asciiStart;
+BMPConfig*AsciiBmp;
+UINT32 *AsciiStart;
 
 int initVideo(BootConfig *bootConfig){
     videoConfig = &bootConfig->videoConfig;
     videoStart = (UINT32 *)bootConfig->videoConfig.FrameBufferBase;
 
-    asciiConfig = &bootConfig->ascii;
-    asciiStart = (UINT32*)bootConfig->ascii.PixelStart;
+    AsciiBmp = (bootConfig->AsciiBmp);
+    AsciiStart = (UINT32 *)bootConfig->AsciiPixelStart;
 
     BLOCK BackGround;
 
@@ -61,21 +61,45 @@ int DrawLetter(char c, POINT dest)
         {
             //找到当前ascii和video的point就好办了
 
-            UINT32 *ascii = asciiStart + inAscii.X + y * PIC_WIDTH + (subtractOneIfBiggerThanZero(inAscii.Y)) * PIC_WIDTH + x;
-            UINT32 *video = videoStart + dest.X + y * videoConfig->HorizontalResolution + (subtractOneIfBiggerThanZero(dest.Y)) * videoConfig->HorizontalResolution + x;
+            UINT32 *ascii = AsciiStart + y * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + x;
+            UINT32 *video = videoStart + dest.Y * videoConfig->HorizontalResolution + y * videoConfig->HorizontalResolution + dest.X + x;
             *video = *ascii;
         }
     }
     return 0;
 }
+
+/*int DrawLetter(UINT8 Ascii, POINT Destination)
+{
+    UINT8 Index = Ascii - 32;
+    if (Ascii < 32 || Ascii > 126) // 0x20~0x7E
+    {
+        Index = 127 - 32;
+    }
+    UINT32 *From = AsciiStart + (Index % 32) * LETTER_WIDTH+ (Index / 32) * LETTER_HEIGHT * 640;
+    UINT32 *To = videoStart + Destination.X + Destination.Y * videoConfig->PixelsPerScanLine;
+    for (int i = 0; i < LETTER_HEIGHT; i++)
+    {
+        for (int j = 0; j < LETTER_WIDTH; j++)
+        {
+            *To = *From;
+            From++;
+            To++;
+        }
+        From = From + 640 - LETTER_WIDTH;
+        To = To + videoConfig->PixelsPerScanLine - LETTER_WIDTH;
+    }
+    return 0;
+}*/
+
 POINT getPosition(char c)
 {
     if (c < 0x20 || c > 0x7e)
     {
         //不支持显示的字符，显示乱码
-        POINT unknown = {
-            .X = 31 * LETTER_WIDTH,
-            .Y = 2 * LETTER_HEIGHT};
+        POINT unknown;
+        unknown.X = 31 * LETTER_WIDTH;
+        unknown.Y = 2 * LETTER_HEIGHT;
         return unknown;
     }
     int line = (c - 0x20) / 0x20;

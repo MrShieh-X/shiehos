@@ -20,7 +20,7 @@ int initShell(VideoConfig videoConfig)
     BackGround.Start.Y = 20;
     BackGround.End.X = width-20;
     BackGround.End.Y = height-20;
-    //DrawBlock(BackGround);
+    DrawBlock(BackGround);
 
     if (Base.Setup.OutLines)
     {

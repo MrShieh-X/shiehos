@@ -35,8 +35,9 @@ typedef struct
 
 typedef struct
 {
+  UINT64 AsciiPixelStart;
   VideoConfig videoConfig;
-  BMPConfig ascii;
+  BMPConfig *AsciiBmp;
 } BootConfig;
 
 #pragma pack()

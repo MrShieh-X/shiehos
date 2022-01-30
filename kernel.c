@@ -1,6 +1,7 @@
 #include "kernel.h"
 
-UINT64 _start(BootConfig *bootConfig){
+UINT64 kernelStart(BootConfig *bootConfig)
+{
     /**UINT64 vertical = bootConfig->VerticalResolution;
     UINT64 horizontal = bootConfig->HorizontalResolution;
     UINT64 PassBack = 0;
@@ -14,42 +15,68 @@ UINT64 _start(BootConfig *bootConfig){
     PassBack = bootConfig->FrameBufferSize;
     return PassBack;*/
 
-
     UINT64 PassBack = 0;
     initVideo(bootConfig);
     initShell(bootConfig->videoConfig);
-	
-	POINT p1={.X=100,.Y=100};
-	POINT p2={.X=130,.Y=100};
-	POINT p3={.X=160,.Y=100};
-	POINT p4={.X=190,.Y=100};
-	POINT p5={.X=220,.Y=100};
-	POINT p6={.X=250,.Y=100};
-	POINT p7={.X=280,.Y=100};
-	POINT p8={.X=310,.Y=100};
-	POINT p9={.X=340,.Y=100};
-	POINT p10={.X=370,.Y=100};
-	POINT p11={.X=400,.Y=100};
-	POINT p12={.X=430,.Y=100};
-	DrawLetter('X',p1);
-	DrawLetter('4',p2);
-	DrawLetter('8',p3);
-	DrawLetter('A',p4);
-	DrawLetter(0xFF,p5);
-	DrawLetter('v',p6);
-	DrawLetter(0x00,p7);
-	DrawLetter('a',p8);
-	DrawLetter('{',p9);
-	DrawLetter('}',p10);
-	DrawLetter('<',p11);
-	DrawLetter('>',p12);
+    
+
+    int *time;
+    POINT p1;
+    p1.X = 100;
+    p1.Y = 100;
+    DrawLetter('X', p1);
+
+    POINT p2;
+    p2.X = 120;
+    p2.Y = 100;
+    POINT p3;
+    p3.X = 140;
+    p3.Y = 100;
+    POINT p4;
+    p4.X = 160;
+    p4.Y = 100;
+    POINT p5;
+    p5.X = 180;
+    p5.Y = 100;
+    POINT p6;
+    p6.X = 200;
+    p6.Y = 100;
+    POINT p7;
+    p7.X = 220;
+    p7.Y = 100;
+    POINT p8;
+    p8.X = 240;
+    p8.Y = 100;
+    POINT p9;
+    p9.X = 260;
+    p9.Y = 100;
+    POINT p10;
+    p10.X = 280;
+    p10.Y = 100;
+    POINT p11;
+    p11.X = 300;
+    p11.Y = 100;
+    POINT p12;
+    p12.X = 320;
+    p12.Y = 100;
+    DrawLetter('M', p2);
+    DrawLetter('r', p3);
+    DrawLetter('S', p4);
+    DrawLetter('h', p5);
+    DrawLetter('i', p6);
+    DrawLetter('e', p7);
+    DrawLetter('h', p8);
+    DrawLetter('X', p9);
+    DrawLetter('6', p10);
+    DrawLetter('-', p11);
+    DrawLetter('_', p12);
 
     while (1)
     {
         ;
     }
 
-    return PassBack;
+    return 0;
 }
 
 /*int DrawPixel(UINT32 *VideoHandle, UINT32 Color, int X, int Y, UINT64 horizontal)
