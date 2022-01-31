@@ -37,12 +37,12 @@ int initShell(VideoConfig videoConfig)
         OutLine.Start.X = 22;
         OutLine.Start.Y = 68;
         OutLine.End.X = width-22;
-        OutLine.End.Y = 70;
+        OutLine.End.Y = 70;/*40*/
         DrawBlock(OutLine);
 
         // Draw OutLine Down
         OutLine.Start.X = 20;
-        OutLine.Start.Y = height - 22;
+        OutLine.Start.Y = height - 22;/*45*/
         OutLine.End.X = width - 20;
         OutLine.End.Y = height - 20;
         DrawBlock(OutLine);
@@ -50,12 +50,12 @@ int initShell(VideoConfig videoConfig)
         // Draw OutLine Left
         OutLine.Start.X = 20;
         OutLine.Start.Y = 22;
-        OutLine.End.X = 22;
-        OutLine.End.Y = height-22;
+        OutLine.End.X = 22; /*53*/
+        OutLine.End.Y = height - 22;
         DrawBlock(OutLine);
 
         // Draw OutLine right
-        OutLine.Start.X = width-22;
+        OutLine.Start.X = width-22;/*58*/
         OutLine.Start.Y = 22;
         OutLine.End.X = width-20;
         OutLine.End.Y = height-22;

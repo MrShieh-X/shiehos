@@ -35,7 +35,6 @@ typedef struct
 
 typedef struct
 {
-  UINT64 AsciiPixelStart;
   VideoConfig videoConfig;
   BMPConfig *AsciiBmp;
 } BootConfig;

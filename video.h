@@ -1,4 +1,4 @@
-#include "Uefi.h"
+#include "sostring.h"
 
 #pragma pack(1)
 
@@ -28,6 +28,7 @@ typedef struct
 #define LETTER_WIDTH 20
 #define PIC_HEIGHT 108
 #define PIC_WIDTH 640
+typedef UINT32 character;
 
 /*typedef struct
 {
@@ -35,10 +36,10 @@ typedef struct
     UINTN y;
 }Position;
 */
-POINT getPosition(char c);
+POINT getPosition(character c);
 
 int initVideo(BootConfig *BootConfig);
 int DrawPixel(PIXEL Pixel);
 int DrawBlock(BLOCK Block);
 //int DrawLetter(UINT8 c, POINT dest);
-int DrawLetter(char c, POINT dest);
+int DrawLetter(character c, POINT dest);

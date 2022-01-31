@@ -11,7 +11,7 @@ int initVideo(BootConfig *bootConfig){
     videoStart = (UINT32 *)bootConfig->videoConfig.FrameBufferBase;
 
     AsciiBmp = (bootConfig->AsciiBmp);
-    AsciiStart = (UINT32 *)bootConfig->AsciiPixelStart;
+    AsciiStart = (UINT32 *)bootConfig->AsciiBmp->PixelStart;
 
     BLOCK BackGround;
 
@@ -50,7 +50,7 @@ int subtractOneIfBiggerThanZero(int value)
     return value > 0 ? value - 1 : value;
 }
 
-int DrawLetter(char c, POINT dest)
+int DrawLetter(character c, POINT dest)
 {
     POINT inAscii = getPosition(c);
     //UINTN startAscii = asciiStart + (inAscii.Y - 1) * PIC_WIDTH + inAscii.X;
@@ -92,7 +92,7 @@ int DrawLetter(char c, POINT dest)
     return 0;
 }*/
 
-POINT getPosition(char c)
+POINT getPosition(character c)
 {
     if (c < 0x20 || c > 0x7e)
     {
