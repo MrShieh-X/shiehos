@@ -8,7 +8,7 @@ UINT64 kernelStart(BootConfig *bootConfig)
     initPrinter(bootConfig);
 
     int i=0;
-    char c[5];
+    char *c;
     c[i++]='a';
     c[i++]='b';
     c[i++]='c';
@@ -16,8 +16,19 @@ UINT64 kernelStart(BootConfig *bootConfig)
     c[i++]='e';
     c[i++]='g';
 
-    printlnString(c);
     printString(c);
+    printInt(4065);
+
+    printlnBoolean(false);
+    printBoolean(true);
+    newLine();
+    printlnHex(456);
+    printHex(4560);
+    printFraction(1.2,1);
+
+    //intToStr(-4096,c,16);
+    //printlnString(c);
+    //printString(c);
 
     //for(character i=0;i<2000;i++)print(i);
     /*print('M');

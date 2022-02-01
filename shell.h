@@ -18,3 +18,5 @@ typedef struct
 #pragma pack()
 
 int initShell(VideoConfig videoConfig);
+
+int drawTitle(UINT32 width, UINT32 height);

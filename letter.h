@@ -1,4 +1,4 @@
-#include "sostring.h"
+#include "string_converter.h"
 
 #define LETTER_HEIGHT 36
 #define LETTER_WIDTH 20

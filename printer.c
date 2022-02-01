@@ -13,8 +13,131 @@ UINT32 startY;
 UINT32 xDistance;
 UINT32 yDistance;
 
+
 /**
- * @return 打印成功的次数
+ * 打印小数并换行
+ *
+ * @return 打印成功的字符数
+ **/
+int printlnFraction(double fra, int accuracy){
+    char*c= fractionToStr(fra,accuracy);
+    return printlnString(c);
+}
+
+/**
+ * 打印小数
+ *
+ * @return 打印成功的字符数
+ **/
+int printFraction(double fra, int accuracy){
+    char*c= fractionToStr(fra,accuracy);
+    return printString(c);
+}
+
+
+/**
+ * 打印十六进制整数（带有“0x”）并换行
+ *
+ * @return 打印成功的字符数
+ **/
+int printlnHex(UINT64 i){
+    char*c;
+    intToStrRadix(i,c, 16);
+    int len=2+ length(c);
+    char nc[len];
+    nc[0]='0';
+    nc[1]='x';
+    for(int i2=2;i2<len;i2++){
+        nc[i2]=c[i2-2];
+    }
+    return printlnString(nc);
+}
+/**
+ * 打印十六进制整数（带有“0x”）
+ *
+ * @return 打印成功的字符数
+ **/
+int printHex(UINT64 i){
+    char*c;
+    intToStrRadix(i,c, 16);
+    int len=2+ length(c);
+    char nc[len];
+    nc[0]='0';
+    nc[1]='x';
+    for(int i2=2;i2<len;i2++){
+        nc[i2]=c[i2-2];
+    }
+    return printString(nc);
+}
+
+/**
+ * 打印 boolean
+ *
+ * @return 打印成功的字符数
+ **/
+int printBoolean(boolean i){
+    char*c;
+    booleanToStr(i,c);
+    return printString(c);
+}
+
+/**
+ * 打印 boolean 并换行
+ *
+ * @return 打印成功的字符数
+ **/
+int printlnBoolean(boolean i){
+    char*c;
+    booleanToStr(i,c);
+    return printlnString(c);
+}
+
+
+/**
+ * 打印整数并换行（十进制）
+ *
+ * @return 打印成功的字符数
+ **/
+int printlnInt(UINT64 i){
+    char*c;
+    intToStr(i,c);
+    return printlnString(c);
+}
+
+/**
+ * 打印整数（十进制）
+ *
+ * @return 打印成功的字符数
+ **/
+int printInt(UINT64 i){
+    char*c;
+    intToStr(i,c);
+    return printString(c);
+}
+/**
+ * 打印整数并换行
+ *
+ * @return 打印成功的字符数
+ **/
+int printlnIntRadix(UINT64 i,int radix){
+    char*c;
+    intToStrRadix(i,c,radix);
+    return printlnString(c);
+}
+
+/**
+ * 打印整数
+ *
+ * @return 打印成功的字符数
+ **/
+int printIntRadix(UINT64 i,int radix){
+    char*c;
+    intToStrRadix(i,c, radix);
+    return printString(c);
+}
+
+/**
+ * @return 打印成功的字符数
  **/
 int printlnString(char *str){
     int successed= printString(str);
@@ -25,13 +148,13 @@ int printlnString(char *str){
 }
 
 /**
- * @return 打印成功的次数
+ * @return 打印成功的字符数
  **/
 int printString(char *str){
     char *b=str;
-    UINT32 len = length(b);
+    //UINT32 len = length(b);
     UINT32 successed=0;
-    for(UINT32 i=0;i<len;i++){
+    for(UINT32 i=0;/*i<len*/b[i]!='\0';i++){
         if(print(b[i])){
             successed++;
         }

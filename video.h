@@ -1,4 +1,4 @@
-#include "sostring.h"
+#include "string_converter.h"
 
 #pragma pack(1)
 
