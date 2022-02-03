@@ -45,11 +45,6 @@ int DrawBlock(BLOCK Block)
     return 0;
 }
 
-int subtractOneIfBiggerThanZero(int value)
-{
-    return value > 0 ? value - 1 : value;
-}
-
 int DrawLetter(character c, POINT dest)
 {
     POINT inAscii = getPosition(c);

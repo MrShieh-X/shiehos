@@ -1,7 +1,6 @@
 #include "shell.h"
 
 BASE Base;
-char *Hello;
 
 int initShell(VideoConfig videoConfig)
 {

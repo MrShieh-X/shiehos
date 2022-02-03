@@ -1,4 +1,4 @@
-#include "Uefi.h"
+#include "xmath.h"
 
 int length(char *str);
 
@@ -10,7 +10,7 @@ int length(char *str);
  * @param accuracy 精度，转换到小数点后几位
  * @return char*
  */
-char *fractionToStr(double fra, int accuracy);
+void fractionToStr(double fra, int accuracy, char*str);
 
 char *booleanToStr(boolean b,char* str);
 
@@ -20,9 +20,9 @@ char *booleanToStr(boolean b,char* str);
  * @from https://blog.csdn.net/nanfeibuyi/article/details/80811498
  * @param num 整数
  * @param str 目标字符串
- * @return char*
+ * @return 长度（没有\0）
  */
-char *intToStr(UINT64 num, char *str);
+UINT32 intToStr(SUINT64 num, char *str);
 
 /**
  * @brief 整数转字符串
@@ -31,6 +31,8 @@ char *intToStr(UINT64 num, char *str);
  * @param num 整数
  * @param str 目标字符串
  * @param radix 进制数
- * @return char*
+ * @return 长度（没有\0）
  */
-char *intToStrRadix(UINT64 num, char *str, int radix);
+UINT32 intToStrRadix(SUINT64 num, char *str, int radix);
+
+void init();
