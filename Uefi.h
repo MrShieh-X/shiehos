@@ -2,11 +2,12 @@ typedef void VOID;
 typedef unsigned char UINT8;
 typedef UINT8 CHAR8;
 typedef unsigned int UINT32;
-typedef unsigned long long UINT64;
+typedef unsigned long long UINT64;//MAX: 18,446,744,073,709,551,615;18446744073709551615
+typedef long long SUINT64;//MAX: 9,223,372,036,854,775,807;9223372036854775807
+
 typedef UINT64 UINTN;
 typedef UINT64 EFI_PHYSICAL_ADDRESS;
 typedef UINT64 EFI_VIRTUAL_ADDRESS;
-typedef long long SUINT64;
 
 #define NULL ((VOID *) 0)
 
