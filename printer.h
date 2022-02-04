@@ -13,24 +13,24 @@ int PrintDec(UINT64 Number);*/
  * %d 整数
  * %s 字符串
  * %f 小数（默认精度6位）
- * %<x>f(<x>：精度) 打印指定精度的小数
+ * //%<x>f(<x>：精度) 打印指定精度的小数
  *
  * @author MrShiehX
  * @return 格式化成功的次数
  **/
-//int printf(char*str,SUINT64 formatObjectsAddresses[],UINT32 addressesSize);
+int printfx(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize);
 
 /**
  * 格式化打印并换行
  * %d 整数
  * %s 字符串
  * %f 小数（默认精度6位）
- * %<x>f(<x>：精度) 打印指定精度的小数
+ * //%<x>f(<x>：精度) 打印指定精度的小数
  *
  * @author MrShiehX
  * @return 格式化成功的次数
  **/
-//int printfln(char*str,SUINT64 formatObjectsAddresses[],UINT32 addressesSize);
+int printfln(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize);
 
 /**
  * 打印小数（十进制）并换行

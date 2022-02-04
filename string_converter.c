@@ -1,9 +1,10 @@
 #include "string_converter.h"
 
-#define UPPER//整数转字符串中的字母是否大写
+//#define UPPER//整数转字符串中的字母是否大写
 
 boolean inited=false;
 char indexx[36 + 1];
+int baseCounts[15];
 
 int length(char* str){
     int i = 0;
@@ -36,13 +37,43 @@ char *booleanToStr(boolean b,char* str){
     }
 }
 
+SUINT64 getIntegerPart(double fra){
+    if(fra<0.0){
+        UINT64 integer=0;
+        while(1){
+            if((fra+(integer+1))>0){
+                break;
+            }
+            integer++;
+        }
+        return -integer;
+    }else if(fra>0.0){
+        UINT64 integer=0;
+        while(1){
+            if((fra-(integer+1))<0){
+                break;
+            }
+            integer++;
+        }
+        return integer;
+    }else{
+        return 0;
+    }
+}
+
 /**
- * @brief 小数转字符串（十进制）
+ * @brief 小数转字符串（十进制）有问题
  *
  * @author MrShiehX
  * @param fra 小数（double、float）
  * @param accuracy 精度，转换到小数点后几位
- * @param str 长度：1(-)+20(maxOfUnsignedLongLong(十进制))+1(.)+accuracy+1(\0)==23+accuracy
+ * @param str 长度：1(-，如果能确保不是负数可以省略)
+ *                 +19(maxOfLongLong(十进制))
+ *                 +1(.)
+ *                 +accuracy
+ *                 +1(\0)
+ *                 ==22（正数21）+accuracy
+ * @problem 转换小数部分以及精度不为0的小数时有问题
  */
 void fractionToStr(double fra, int accuracy, char*str)
 {
@@ -75,13 +106,13 @@ void fractionToStr(double fra, int accuracy, char*str)
     if(negative)fra=-fra;
 
     //获得整数的部分，i就是整数
-    UINT64 integer=0;
-    while(1){
+    SUINT64 integer=/*0*/getIntegerPart(fra);
+    /*while(1){
         if((fra-(integer+1))<0){
             break;
         }
         integer++;
-    }
+    }*/
 
     if(accuracy<=0){
         //print('A');
@@ -102,10 +133,10 @@ void fractionToStr(double fra, int accuracy, char*str)
 
 
     //下面开始获得小数部分
-    SUINT64 multiplier=xpow(10,accuracy);
-
-    SUINT64 fractionPart=((SUINT64)((fra-integer)*multiplier));
-
+    double multiplier=xpowFra(10.0,accuracy);
+    /**Problem Start 可能是精度问题*/
+    SUINT64 fractionPart=(getIntegerPart(/**problem 减法有问题*/(fra-(double)integer)*multiplier/**problem*/));
+    /**Problem End*/
 
 
     char fractionPartString[accuracy+1];
@@ -133,11 +164,38 @@ void fractionToStr(double fra, int accuracy, char*str)
 
 
 /**
+ * @brief 整数转字符串时计算长度
+ *
+ * @author MrShiehX
+ * @param num 整数
+ * @param radix 进制数
+ * @return 字符串长度（已包含负号（如果有）、该进制的最大数值的长度、“\0”）
+ */
+UINT32 intToStrLength(SUINT64 num, int radix){
+    if(radix<2)radix=10;
+    UINT32 length=0;
+    boolean negative=num<0;
+    if(negative)length++;
+
+    if(!inited)init();
+
+    int radixLessTwo=radix-2;
+    if(radixLessTwo<=14){
+        length+=baseCounts[radixLessTwo];
+    }else{
+        length+=16;
+    }
+    length++;//\0
+    return length;
+}
+
+
+/**
  * @brief 整数转字符串(十进制)
  *
  * @from https://blog.csdn.net/nanfeibuyi/article/details/80811498
  * @param num 整数
- * @param str 目标字符串
+ * @param str 目标字符串 长度：UINT32 intToStrLength(SUINT64 num, int radix)
  * @return 长度（没有\0）
  */
 UINT32 intToStr(SUINT64 num, char *str){
@@ -149,7 +207,7 @@ UINT32 intToStr(SUINT64 num, char *str){
  * 
  * @from https://blog.csdn.net/nanfeibuyi/article/details/80811498
  * @param num 整数
- * @param str 目标字符串
+ * @param str 目标字符串 长度：UINT32 intToStrLength(SUINT64 num, int radix)
  * @param radix 进制数
  * @return 长度（没有\0）
  */
@@ -158,6 +216,8 @@ UINT32 intToStrRadix(SUINT64 num, char *str, int radix) {
 
     if(!inited)init();
     //"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //索引表
+
+    if(radix<2)radix=10;
 
     boolean negative = num < 0;
     if (negative) {
@@ -250,5 +310,53 @@ void init(){
         indexx[p]=p+base/*小写*/-10;
     }
     indexx[36] = '\0';
+
+/*
+ * SUINT64
+ * 2 111111111111111111111111111111111111111111111111111111111111111 63
+ * 3 2021110011022210012102010021220101220221 40
+ * 4 13333333333333333333333333333333 32
+ * 5 1104332401304422434310311212 28
+ * 6 1540241003031030222122211 25
+ * 7 22341010611245052052300 23
+ * 8 777777777777777777777 21
+ * 9 67404283172107811827 20
+ * 10 9223372036854775807 19
+ * 11 1728002635214590697 19
+ * 12 41A792678515120367 18
+ * 13 10B269549075433C37 18
+ * 14 4340724C6C71DC7A7 17
+ * 15 160E2AD3246366807 17
+ * 16 7FFFFFFFFFFFFFFF 16
+ * 17 33D3D8307B214008 16
+ * 18 16AGH595DF825FA7 16
+ * 19 BA643DCI0FFEEHH 15
+ * 20 5CBFJIA3FH26JA7 15
+ * 21 2HEICIIIE82DH97 15
+ * 22 1ADAIBB21DCKFA7 15
+ *
+ *
+ *
+ * 36 1Y2P0IJ32E8E7
+ * */
+
+
+    baseCounts[0]=63;
+    baseCounts[1]=40;
+    baseCounts[2]=32;
+    baseCounts[3]=28;
+    baseCounts[4]=25;
+    baseCounts[5]=23;
+    baseCounts[6]=21;
+    baseCounts[7]=20;
+    baseCounts[8]=19;
+    baseCounts[9]=19;
+    baseCounts[10]=18;
+    baseCounts[11]=18;
+    baseCounts[12]=17;
+    baseCounts[13]=17;
+    baseCounts[14]=16;
+
+
     inited=true;
 }

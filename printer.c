@@ -14,37 +14,46 @@ UINT32 xDistance;
 UINT32 yDistance;
 
 /**
- * 格式化打印（未完善）
+ * 格式化打印
  * %d 整数
  * %s 字符串
  * %f 小数（默认精度6位）
- * %<x>f(<x>：精度) 打印指定精度的小数
+ * //%<x>f(<x>：精度) 打印指定精度的小数
  *
  * @author MrShiehX
  * @return 格式化成功的次数
  **/
-int printf(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize){
+int printfx(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize){
     int number=0;
     int success=0;
     int formatNumber=0;
     while(str[number]!='\0'&&addressesSize>=0){
         char c=str[number++];
-        if(c=='%'){
+        if(c=='%'&&formatNumber<addressesSize){
             int* address=(int *)(formatObjectsAddresses[formatNumber]);
             char next=str[number];
             if (next=='d') {
-                long long int value=((UINT64)(*address));
-                char *integer;
+                SUINT64 value=((SUINT64)(*address));
+                char integer[intToStrLength(value,10)];
                 intToStr(value,integer);
                 printString(integer);
 
                 success++;
                 formatNumber++;
-                number+=1;
+                number++;
             }else if (next=='s') {
-
+                char* value=((char*)(address));
+                printString(value);
+                success++;
+                formatNumber++;
+                number++;
             }else if (next=='f') {
-
+                int accuracy=6;
+                double value=*((double*)(address));
+                printFraction(value,accuracy);
+                success++;
+                formatNumber++;
+                number++;
             }/*else if (next=='0'
                       ||next=='1'
                         ||next=='2'
@@ -61,7 +70,6 @@ int printf(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize){
 
             }*/else{
                 print(c);
-
             }
         }else{
             print(c);
@@ -75,13 +83,13 @@ int printf(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize){
  * %d 整数
  * %s 字符串
  * %f 小数（默认精度6位）
- * %<x>f(<x>：精度) 打印指定精度的小数
+ * //%<x>f(<x>：精度) 打印指定精度的小数
  *
  * @author MrShiehX
  * @return 格式化成功的次数
  **/
 int printfln(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize){
-    int p=printf(str,formatObjectsAddresses,addressesSize);
+    int p=printfx(str,formatObjectsAddresses,addressesSize);
     newLine();
     return p;
 }
@@ -93,7 +101,7 @@ int printfln(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize){
  * @return 打印成功的字符数
  **/
 int printlnFraction(double fra, int accuracy){
-    char c[23+accuracy];
+    char c[(fra<0?22:21)+accuracy];
     fractionToStr(fra,accuracy,c);
     return printlnString(c);
 }
@@ -104,7 +112,7 @@ int printlnFraction(double fra, int accuracy){
  * @return 打印成功的字符数
  **/
 int printFraction(double fra, int accuracy){
-    char c[23+accuracy];
+    char c[(fra<0?22:21)+accuracy];
     fractionToStr(fra,accuracy,c);
     return printString(c);
 }
@@ -126,7 +134,7 @@ int printlnHex(SUINT64 i){
     if(print('x')){
         success++;
     }
-    char c[0];
+    char c[2/*0x*/+intToStrLength(i,16)];
     intToStrRadix((i<0)?(-i):(i),c,16);
     success+=printlnString(c);
     return success;
@@ -147,7 +155,7 @@ int printHex(SUINT64 i){
     if(print('x')){
         success++;
     }
-    char c[0];
+    char c[2/*0x*/+intToStrLength(i,16)];
     intToStrRadix((i<0)?(-i):(i),c,16);
     success+=printString(c);
     return success;
@@ -182,8 +190,7 @@ int printlnBoolean(boolean i){
  * @return 打印成功的字符数
  **/
 int printlnInt(SUINT64 i){
-    char c[0];
-
+    char c[intToStrLength(i,10)];
     intToStr(i,c);
     return printlnString(c);
 }
@@ -194,7 +201,7 @@ int printlnInt(SUINT64 i){
  * @return 打印成功的字符数
  **/
 int printInt(SUINT64 i){
-    char c[0];
+    char c[intToStrLength(i,10)];
     intToStr(i,c);
     return printString(c);
 }
@@ -204,7 +211,7 @@ int printInt(SUINT64 i){
  * @return 打印成功的字符数
  **/
 int printlnIntRadix(SUINT64 i,int radix){
-    char c[0];
+    char c[intToStrLength(i,radix)];
     intToStrRadix(i,c,radix);
     return printlnString(c);
 }
@@ -215,7 +222,7 @@ int printlnIntRadix(SUINT64 i,int radix){
  * @return 打印成功的字符数
  **/
 int printIntRadix(SUINT64 i,int radix){
-    char c[0];
+    char c[intToStrLength(i,radix)];
     intToStrRadix(i,c, radix);
     return printString(c);
 }
