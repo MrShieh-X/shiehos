@@ -1,4 +1,4 @@
-#include "Uefi.h"
+#include "../kernel/Uefi.h"
 
 /**
  * 获得绝对值（分数）

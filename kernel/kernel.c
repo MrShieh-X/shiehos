@@ -10,7 +10,7 @@ initMemory(bootConfig);
 
     int x=0;
     char c[61];
-    c[x++]='P';
+    c[x++]='A';
     c[x++]='r';
     c[x++]='i';
     c[x++]='n';

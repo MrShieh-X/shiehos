@@ -1,4 +1,4 @@
-#include "string_converter.h"
+#include "../utils/string_converter.h"
 
 #define LETTER_HEIGHT 36
 #define LETTER_WIDTH 20

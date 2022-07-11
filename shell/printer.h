@@ -1,4 +1,4 @@
-#include "video.h"
+#include "../video/video.h"
 
 int initPrinter(BootConfig *bootConfig);
 POINT nextPosition();

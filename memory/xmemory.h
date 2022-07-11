@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "../shell/shell.h"
 
 #define FREE_MEMORY 0
 #define OS_CODE 1
