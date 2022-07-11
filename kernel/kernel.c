@@ -1,12 +1,18 @@
 #include "kernel.h"
 
+int say_hi(int a5);
+
 _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     //UINT64 PassBack = 0;
     initVideo(bootConfig);
     initShell(bootConfig->videoConfig);
     initPrinter(bootConfig);
+    initMemory(bootConfig);
 
-initMemory(bootConfig);
+    int ao=10;
+    printlnInt(ao);
+    int* aa=&ao;
+    printlnInt(say_hi(2222));
 
     int x=0;
     char c[61];
