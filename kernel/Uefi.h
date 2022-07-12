@@ -62,8 +62,7 @@ typedef enum {
 } EFI_MEMORY_TYPE;
 
 #pragma pack(1)
-typedef struct
-{
+typedef struct {
     UINT64 BufferSize;
     VOID *Buffer;
     UINT64 MapSize;
@@ -73,41 +72,37 @@ typedef struct
 } MEMORY_MAP;
 
 
-typedef struct
-{
-    UINT32  Type;
-    UINT32  ReservedA;
+typedef struct {
+    UINT32 Type;
+    UINT32 ReservedA;
     EFI_PHYSICAL_ADDRESS PhysicalStart;
-    EFI_VIRTUAL_ADDRESS  VirtualStart;
-    UINT64  NumberOfPages;
-    UINT64  Attribute;
-    UINT64  ReservedB;
+    EFI_VIRTUAL_ADDRESS VirtualStart;
+    UINT64 NumberOfPages;
+    UINT64 Attribute;
+    UINT64 ReservedB;
 } EFI_MEMORY_DESCRIPTOR;
 
-typedef struct
-{
-  UINTN Size;
-  UINTN PageSize;
-  UINTN Width;
-  UINTN Height;
-  UINTN Offset;
-  UINT64 PixelStart;
+typedef struct {
+    UINTN Size;
+    UINTN PageSize;
+    UINTN Width;
+    UINTN Height;
+    UINTN Offset;
+    UINT64 PixelStart;
 } BMPConfig;
 
-typedef struct
-{
-  EFI_PHYSICAL_ADDRESS FrameBufferBase;
-  UINT64 FrameBufferSize;
-  UINT32 HorizontalResolution;
-  UINT32 VerticalResolution;
-  UINT32 PixelsPerScanLine;
+typedef struct {
+    EFI_PHYSICAL_ADDRESS FrameBufferBase;
+    UINT64 FrameBufferSize;
+    UINT32 HorizontalResolution;
+    UINT32 VerticalResolution;
+    UINT32 PixelsPerScanLine;
 } VideoConfig;
 
-typedef struct
-{
-  VideoConfig videoConfig;
-  BMPConfig *AsciiBmp;
-  MEMORY_MAP memoryMap;
+typedef struct {
+    VideoConfig videoConfig;
+    BMPConfig *AsciiBmp;
+    MEMORY_MAP memoryMap;
 } BootConfig;
 
 #pragma pack()

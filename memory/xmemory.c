@@ -1,8 +1,7 @@
 #include "xmemory.h"
 
-int initMemory(BootConfig *BootConfig)
-{
-    EFI_MEMORY_DESCRIPTOR *EfiMemory = (EFI_MEMORY_DESCRIPTOR *)(BootConfig->memoryMap.Buffer);
+int initMemory(BootConfig *BootConfig) {
+    EFI_MEMORY_DESCRIPTOR *EfiMemory = (EFI_MEMORY_DESCRIPTOR *) (BootConfig->memoryMap.Buffer);
 
     /*for(int i = 0; i < 22; i++)
     {
@@ -59,12 +58,10 @@ int initMemory(BootConfig *BootConfig)
     //PrintSpace();
     EFI_PHYSICAL_ADDRESS OsMemoryAddress = 0;
     int EfiDescriptorCount = BootConfig->memoryMap.MapSize / BootConfig->memoryMap.DescriptorSize;
-    for(int i = 0; i < EfiDescriptorCount; i++)
-    {
-        if(EfiMemoryPageSize < EfiMemory[i].NumberOfPages && EfiMemory[i].Type == 7)
-        {
+    for (int i = 0; i < EfiDescriptorCount; i++) {
+        if (EfiMemoryPageSize < EfiMemory[i].NumberOfPages && EfiMemory[i].Type == 7) {
             OsMemoryAddress = EfiMemory[i].PhysicalStart;
-            OsMemory = (OS_MEMORY_DESCRIPTOR *)OsMemoryAddress;
+            OsMemory = (OS_MEMORY_DESCRIPTOR *) OsMemoryAddress;
             break;
         }
     }
@@ -73,30 +70,22 @@ int initMemory(BootConfig *BootConfig)
     //PrintHex((UINT64)OsMemory);
     //PrintSpace();
     int OsMemDescNum = 0;
-    for(int i = 0; i < EfiDescriptorCount; i++)
-    {
-        if(EfiMemory[i].Type == EfiBootServicesCode
-           || EfiMemory[i].Type == EfiBootServicesData
-           || EfiMemory[i].Type == EfiConventionalMemory)
-        {
+    for (int i = 0; i < EfiDescriptorCount; i++) {
+        if (EfiMemory[i].Type == EfiBootServicesCode
+            || EfiMemory[i].Type == EfiBootServicesData
+            || EfiMemory[i].Type == EfiConventionalMemory) {
             OsMemory->Type = FREE_MEMORY;
-        }
-        else if(EfiMemory[i].Type == EfiMemoryMappedIO)
-        {
+        } else if (EfiMemory[i].Type == EfiMemoryMappedIO) {
             OsMemory->Type = MMIO_MEMORY;
-        }
-        else
-        {
+        } else {
             OsMemory->Type = UEFI_MEMORY;
         }
         OsMemory->PhysicalStart = EfiMemory[i].PhysicalStart;
         OsMemory->PageSize = EfiMemory[i].NumberOfPages;
 
-        if(i > 0 && OsMemory->Type == (OsMemory-1)->Type)
-        {
-            if(OsMemory->PhysicalStart == (OsMemory-1)->PhysicalStart + ((OsMemory-1)->PageSize << 12))
-            {
-                (OsMemory-1)->PageSize += OsMemory->PageSize;
+        if (i > 0 && OsMemory->Type == (OsMemory - 1)->Type) {
+            if (OsMemory->PhysicalStart == (OsMemory - 1)->PhysicalStart + ((OsMemory - 1)->PageSize << 12)) {
+                (OsMemory - 1)->PageSize += OsMemory->PageSize;
                 continue;
             }
         }
@@ -109,17 +98,15 @@ int initMemory(BootConfig *BootConfig)
     print(' ');
     printlnInt(OsMemDescNum);
 
-    OsMemory = (OS_MEMORY_DESCRIPTOR *)OsMemoryAddress;
+    OsMemory = (OS_MEMORY_DESCRIPTOR *) OsMemoryAddress;
     UINT64 TotalMemory = 0;
-    for(int i = 0; i < OsMemDescNum; i++)
-    {
+    for (int i = 0; i < OsMemDescNum; i++) {
 //        printInt(OsMemory->Type);
 //        print(' ');
 //        printHex(OsMemory->PhysicalStart);
 //        print(' ');
 //        printlnHex(OsMemory->PageSize);
-        if(OsMemory->Type != MMIO_MEMORY)
-        {
+        if (OsMemory->Type != MMIO_MEMORY) {
             TotalMemory += OsMemory->PageSize;
         }
         OsMemory++;

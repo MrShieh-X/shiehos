@@ -5,6 +5,7 @@
 #include "../utils/string_converter.h"
 
 int initPrinter(BootConfig *bootConfig);
+
 POINT nextPosition();
 
 
@@ -22,7 +23,7 @@ int PrintDec(UINT64 Number);*/
  * @author MrShiehX
  * @return 格式化成功的次数
  **/
-int printfx(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize);
+int printfx(char *str, UINT64 formatObjectsAddresses[], UINT32 addressesSize);
 
 /**
  * 格式化打印并换行
@@ -34,7 +35,7 @@ int printfx(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize);
  * @author MrShiehX
  * @return 格式化成功的次数
  **/
-int printfln(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize);
+int printfln(char *str, UINT64 formatObjectsAddresses[], UINT32 addressesSize);
 
 /**
  * 打印小数（十进制）并换行
@@ -42,18 +43,21 @@ int printfln(char*str,UINT64 formatObjectsAddresses[],UINT32 addressesSize);
  * @return 打印成功的字符数
  **/
 int printlnFraction(double fra, int accuracy);
+
 /**
  * 打印小数（十进制）
  *
  * @return 打印成功的字符数
  **/
 int printFraction(double fra, int accuracy);
+
 /**
  * 打印十六进制整数（带有“0x”）并换行
  *
  * @return 打印成功的字符数
  **/
 int printlnHex(SUINT64 i);
+
 /**
  * 打印十六进制整数（带有“0x”）
  *
@@ -88,19 +92,20 @@ int printlnInt(SUINT64 i);
  * @return 打印成功的字符数
  **/
 int printInt(SUINT64 i);
+
 /**
  * 打印整数并换行
  *
  * @return 打印成功的字符数
  **/
-int printlnIntRadix(SUINT64 i,int radix);
+int printlnIntRadix(SUINT64 i, int radix);
 
 /**
  * 打印整数
  *
  * @return 打印成功的字符数
  **/
-int printIntRadix(SUINT64 i,int radix);
+int printIntRadix(SUINT64 i, int radix);
 
 /**
  * @return 是否换行成功
@@ -121,4 +126,5 @@ int printString(char *c);
  * @return 打印成功的字符数
  **/
 int printlnString(char *c);
+
 #endif

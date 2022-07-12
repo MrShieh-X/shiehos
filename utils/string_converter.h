@@ -4,9 +4,12 @@
 #include "xmath.h"
 
 int length(char *str);
+
 SUINT64 getIntegerPart(double fra);
-char *booleanToStr(boolean b,char* str);
-void init();
+
+char *booleanToStr(boolean b, char *str);
+
+void initStringConverter();
 
 /**
  * @brief 整数转字符串时计算长度
@@ -32,7 +35,7 @@ UINT32 intToStrLength(SUINT64 num, int radix);
  *                 ==22（正数21）+accuracy
  * @problem 转换小数部分以及精度不为0的小数时有问题
  */
-void fractionToStr(double fra, int accuracy, char*str);
+void fractionToStr(double fra, int accuracy, char *str);
 
 
 /**

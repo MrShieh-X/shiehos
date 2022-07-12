@@ -6,8 +6,7 @@
 
 #pragma pack(1)
 
-typedef struct
-{
+typedef struct {
     UINT32 Width;
     UINT32 Height;
     UINT32 X;
@@ -15,8 +14,7 @@ typedef struct
     UINT32 OutLines;
 } SETUP;
 
-typedef struct
-{
+typedef struct {
     SETUP Setup;
 } BASE;
 #pragma pack()
