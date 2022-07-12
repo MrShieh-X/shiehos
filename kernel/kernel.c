@@ -1,6 +1,6 @@
 #include "kernel.h"
 
-int say_hi(int a5);
+int say_hi(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13);
 
 _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     //UINT64 PassBack = 0;
@@ -12,7 +12,7 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     int ao=10;
     printlnInt(ao);
     int* aa=&ao;
-    printlnInt(say_hi(2222));
+    printlnInt(say_hi(111111,222222,333333,444444,555555,66666,777777,888888,99999,1010101010,-111111,-22222,-33333));
 
     int x=0;
     char c[61];

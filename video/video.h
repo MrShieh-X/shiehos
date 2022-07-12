@@ -1,4 +1,7 @@
-#include "../utils/string_converter.h"
+#ifndef __VIDEO_VIDEO_H__
+#define __VIDEO_VIDEO_H__
+
+#include "../kernel/Uefi.h"
 
 #pragma pack(1)
 
@@ -39,7 +42,9 @@ typedef UINT32 character;
 POINT getPosition(character c);
 
 int initVideo(BootConfig *BootConfig);
-int DrawPixel(PIXEL Pixel);
-int DrawBlock(BLOCK Block);
-//int DrawLetter(UINT8 c, POINT dest);
-int DrawLetter(character c, POINT dest);
+int drawPixel(PIXEL Pixel);
+int drawBlock(BLOCK Block);
+//int drawLetter(UINT8 c, POINT dest);
+int drawLetter(character c, POINT dest);
+
+#endif

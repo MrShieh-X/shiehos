@@ -1,4 +1,8 @@
+#ifndef __SHELL_PRINTER_H__
+#define __SHELL_PRINTER_H__
+
 #include "../video/video.h"
+#include "../utils/string_converter.h"
 
 int initPrinter(BootConfig *bootConfig);
 POINT nextPosition();
@@ -117,3 +121,4 @@ int printString(char *c);
  * @return 打印成功的字符数
  **/
 int printlnString(char *c);
+#endif

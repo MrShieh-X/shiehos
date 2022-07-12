@@ -1,4 +1,8 @@
-#include "../shell/shell.h"
+#ifndef __MEMORY_XMEMORY_H__
+#define __MEMORY_XMEMORY_H__
+
+#include "../kernel/Uefi.h"
+#include "../shell/printer.h"
 
 #define FREE_MEMORY 0
 #define OS_CODE 1
@@ -20,3 +24,4 @@ typedef struct
 
 
 int initMemory(BootConfig *BootConfig);
+#endif

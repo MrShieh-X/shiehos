@@ -296,7 +296,7 @@ boolean print(character c) {
         if (point.X == -1 || point.Y == -1) {
             return false;
         }
-        DrawLetter(c, point);
+        drawLetter(c, point);
         return true;
     }
 }

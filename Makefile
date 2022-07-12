@@ -12,8 +12,6 @@ kernel/kernel.h \
 kernel/Uefi.h \
 memory/xmemory.c \
 memory/xmemory.h \
-shell/letter.c \
-shell/letter.h \
 shell/printer.c \
 shell/printer.h \
 shell/shell.c \
@@ -28,7 +26,6 @@ $(OUTPUT_DIRECTORY)/asms/asmfuncs.o
 	-mkdir $(OUTPUT_DIRECTORY)
 	clang kernel/kernel.c \
           memory/xmemory.c \
-          shell/letter.c \
           shell/printer.c \
           shell/shell.c \
           utils/string_converter.c \

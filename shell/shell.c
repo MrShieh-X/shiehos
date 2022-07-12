@@ -19,7 +19,7 @@ int initShell(VideoConfig videoConfig)
     BackGround.Start.Y = 20;
     BackGround.End.X = width-20;
     BackGround.End.Y = height-20;
-    DrawBlock(BackGround);
+    drawBlock(BackGround);
 
     if (Base.Setup.OutLines)
     {
@@ -30,35 +30,35 @@ int initShell(VideoConfig videoConfig)
         OutLine.Start.Y = 20;
         OutLine.End.X = width - 20;
         OutLine.End.Y = 22;/*33*/
-        DrawBlock(OutLine);
+        drawBlock(OutLine);
 
         // Draw OutLine Middle
         OutLine.Start.X = 22;
         OutLine.Start.Y = 68;/*38*/
         OutLine.End.X = width-22;
         OutLine.End.Y = 70;/*40*/
-        DrawBlock(OutLine);
+        drawBlock(OutLine);
 
         // Draw OutLine Down
         OutLine.Start.X = 20;
         OutLine.Start.Y = height - 22;/*45*/
         OutLine.End.X = width - 20;
         OutLine.End.Y = height - 20;
-        DrawBlock(OutLine);
+        drawBlock(OutLine);
 
         // Draw OutLine Left
         OutLine.Start.X = 20;
         OutLine.Start.Y = 22;
         OutLine.End.X = 22; /*53*/
         OutLine.End.Y = height - 22;
-        DrawBlock(OutLine);
+        drawBlock(OutLine);
 
         // Draw OutLine right
         OutLine.Start.X = width-22;/*58*/
         OutLine.Start.Y = 22;
         OutLine.End.X = width-20;
         OutLine.End.Y = height-22;
-        DrawBlock(OutLine);
+        drawBlock(OutLine);
     }
 
     drawTitle(width,height);
@@ -92,7 +92,7 @@ int drawTitle(UINT32 width, UINT32 height){
         POINT p;
         p.X=x+LETTER_WIDTH*i;
         p.Y=y;
-        DrawLetter(c,p);
+        drawLetter(c,p);
     }
     return 0;
 }

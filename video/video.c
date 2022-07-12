@@ -20,18 +20,18 @@ int initVideo(BootConfig *bootConfig){
     BackGround.End.X = bootConfig->videoConfig.HorizontalResolution - 1;
     BackGround.End.Y = bootConfig->videoConfig.VerticalResolution - 1;
     BackGround.Color = 0xFF0078D7;
-    DrawBlock(BackGround);
+    drawBlock(BackGround);
     return 0;
 }
 
-int DrawPixel(PIXEL Pixel)
+int drawPixel(PIXEL Pixel)
 {
     UINT32 *Position = videoStart + (Pixel.Y - 1) * videoConfig->PixelsPerScanLine + Pixel.X;
     *Position = Pixel.Color;
     return 0;
 }
 
-int DrawBlock(BLOCK Block)
+int drawBlock(BLOCK Block)
 {
     PIXEL Pixel;
     Pixel.Color = Block.Color;
@@ -39,13 +39,13 @@ int DrawBlock(BLOCK Block)
         for (int x = Block.Start.X; x < Block.End.X;x++){
             Pixel.X = x;
             Pixel.Y = y;
-            DrawPixel(Pixel);
+            drawPixel(Pixel);
         }
     }
     return 0;
 }
 
-int DrawLetter(character c, POINT dest)
+int drawLetter(character c, POINT dest)
 {
     POINT inAscii = getPosition(c);
     //UINTN startAscii = asciiStart + (inAscii.Y - 1) * PIC_WIDTH + inAscii.X;
@@ -64,7 +64,7 @@ int DrawLetter(character c, POINT dest)
     return 0;
 }
 
-/*int DrawLetter(UINT8 Ascii, POINT Destination)
+/*int drawLetter(UINT8 Ascii, POINT Destination)
 {
     UINT8 Index = Ascii - 32;
     if (Ascii < 32 || Ascii > 126) // 0x20~0x7E

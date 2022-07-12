@@ -1,3 +1,6 @@
+#ifndef __UTILS_STRING_CONVERTER_H__
+#define __UTILS_STRING_CONVERTER_H__
+
 #include "xmath.h"
 
 int length(char *str);
@@ -52,3 +55,5 @@ UINT32 intToStr(SUINT64 num, char *str);
  * @return 长度（没有\0）
  */
 UINT32 intToStrRadix(SUINT64 num, char *str, int radix);
+
+#endif
