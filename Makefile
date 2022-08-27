@@ -16,6 +16,16 @@ utils/xmath.c \
 utils/color.c \
 video/video.c \
 video/cursor.c \
+kernel/Uefi.h \
+kernel/kernel.h \
+memory/xmemory.h \
+shell/printer.h \
+shell/shell.h \
+utils/string_converter.h \
+utils/xmath.h \
+utils/color.h \
+video/video.h \
+video/cursor.h \
 $(OUTPUT_DIRECTORY)/asms/asmfuncs.o
 	-mkdir $(OUTPUT_DIRECTORY)
 	clang kernel/kernel.c \

@@ -27,7 +27,7 @@ int printfx(char *str, UINT64 formatObjectsAddresses[], UINT32 addressesSize) {
     int number = 0;
     int success = 0;
     int formatNumber = 0;
-    while (str[number] != '\0' && addressesSize >= 0) {
+    while (str[number] /*!= '\0'*/ && addressesSize >= 0) {
         char c = str[number++];
         if (c == '%' && formatNumber < addressesSize) {
             int *address = (int *) (formatObjectsAddresses[formatNumber]);
@@ -247,7 +247,7 @@ int printString(char *str) {
     char *b = str;
     //UINT32 len = length(b);
     UINT32 successed = 0;
-    for (UINT32 i = 0;/*i<len*/b[i] != '\0'; i++) {
+    for (UINT32 i = 0;/*i<len*/b[i]/* != '\0'*/; i++) {
         if (print(b[i])) {
             successed++;
         }

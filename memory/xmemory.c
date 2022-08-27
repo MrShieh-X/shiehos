@@ -51,7 +51,7 @@ int initMemory(BootConfig *BootConfig) {
         EfiMemory++;
     }*/
 
-    OS_MEMORY_DESCRIPTOR *OsMemory = NULL;
+    OS_MEMORY_DESCRIPTOR *OsMemory/* = NULL*/;
     // Find some space for OSMemory table, should be bigger than EfiMemroy table
     int EfiMemoryPageSize = (BootConfig->memoryMap.MapSize >> 12) + 1;
     //PrintDec(EfiMemoryPageSize);

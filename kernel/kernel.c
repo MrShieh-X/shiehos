@@ -7,8 +7,21 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     initVideo(bootConfig);
     initShell(bootConfig->videoConfig);
     initPrinter(bootConfig);
-    initMemory(bootConfig);
+    //initMemory(bootConfig);
     initStringConverter();
+
+    POINT inAscii= getPosition('a');
+    UINT32 *ascii = getAsciiStart() + 11 * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + 4;
+    printlnInt(*ascii);
+    {
+        BLOCK block;
+        block.Color = 0xaaff0000;
+        block.Start.X = 180;
+        block.Start.Y = 180;
+        block.End.X = 280;
+        block.End.Y = 280;
+        drawBlock(block);
+    }
 
 
     POINT p233;
@@ -65,7 +78,7 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     }
 
     BLOCK block;
-    block.Color = 0x000000;
+    block.Color = 0xaaff0000;
     block.Start.X = 180;
     block.Start.Y = 180;
     block.End.X = 280;
@@ -118,6 +131,18 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     p233.Y = 200;
     setCursor(p233);
 
+
+    char a[5];
+    a[0]='b';
+    a[1]='%';
+    a[2]='d';
+    a[3]='e';
+    a[4]='\0';
+    UINT64 address[1];
+    int A=24;
+    address[0]=(UINT64)(&(A));
+    printfln(a,address,1);
+
     /*p233.X=600;
     setCursor(p233);*/
 
@@ -135,6 +160,7 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
         newLine();
     }
 */
+
 
 
     while (1) { ; }

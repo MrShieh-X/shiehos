@@ -2,6 +2,7 @@
 #define __VIDEO_VIDEO_H__
 
 #include "../kernel/Uefi.h"
+//#include "../shell/printer.h"
 //#include "cursor.h"
 
 #pragma pack(1)
@@ -61,5 +62,7 @@ int drawBlock(BLOCK Block);
 int drawLetter(character c, POINT dest);
 
 boolean drawMousePointer(POINT point);
+
+UINT32 *getAsciiStart();
 
 #endif

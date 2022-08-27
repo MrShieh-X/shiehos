@@ -146,7 +146,7 @@ POINT getPosition(character c) {
         unknown.Y = 2 * LETTER_HEIGHT;
         return unknown;
     }
-    int line = (c - 0x20) / 0x20;
+    UINT32 line = (c - 0x20) / 0x20;
     /*if (c >= 0x60)
         line = 2;
     else if (c >= 0x40)
@@ -159,8 +159,8 @@ POINT getPosition(character c) {
     //int subtraction = line * (PIC_WIDTH / LETTER_WIDTH);
     //int x = (c - subtraction - 0x20) * LETTER_WIDTH;
 
-    int y = line * LETTER_HEIGHT;
-    int x = ((c - 0x20) % 0x20) * LETTER_WIDTH;
+    UINT32 y = line * LETTER_HEIGHT;
+    UINT32 x = ((c - 0x20) % 0x20) * LETTER_WIDTH;
 
     POINT p = {
             .X = x,
@@ -170,8 +170,8 @@ POINT getPosition(character c) {
 
 
 boolean drawMousePointer(POINT point) {
-    int startX = point.X;
-    int startY = point.Y;
+    UINT32 startX = point.X;
+    UINT32 startY = point.Y;
     for (int i = 0; i < 16; i++) {
         PIXEL pixel = {
                 .X=startX,
@@ -363,4 +363,8 @@ boolean drawMousePointer(POINT point) {
 
 
     return true;
+}
+
+UINT32 *getAsciiStart(){
+    return AsciiStart;
 }

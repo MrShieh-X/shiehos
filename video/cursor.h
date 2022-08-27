@@ -7,6 +7,6 @@ boolean setCursor(POINT point);
 
 void backup(POINT point);
 
-void recover();
+void recover(POINT point);
 
 #endif
