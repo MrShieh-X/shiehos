@@ -14,6 +14,7 @@ shell/shell.c \
 utils/string_converter.c \
 utils/xmath.c \
 utils/color.c \
+utils/memory_utils.c \
 video/video.c \
 video/cursor.c \
 kernel/Uefi.h \
@@ -24,6 +25,7 @@ shell/shell.h \
 utils/string_converter.h \
 utils/xmath.h \
 utils/color.h \
+utils/memory_utils.h \
 video/video.h \
 video/cursor.h \
 $(OUTPUT_DIRECTORY)/asms/asmfuncs.o
@@ -35,6 +37,7 @@ $(OUTPUT_DIRECTORY)/asms/asmfuncs.o
           utils/string_converter.c \
           utils/color.c \
           utils/xmath.c \
+          utils/memory_utils.c \
           video/video.c \
           video/cursor.c \
           $(OUTPUT_DIRECTORY)/asms/asmfuncs.o \

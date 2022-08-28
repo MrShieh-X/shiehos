@@ -2,7 +2,7 @@
 #define __VIDEO_VIDEO_H__
 
 #include "../kernel/Uefi.h"
-//#include "../shell/printer.h"
+#include "../utils/memory_utils.h"
 //#include "cursor.h"
 
 #pragma pack(1)
@@ -15,13 +15,13 @@ typedef struct {
 typedef struct {
     UINT32 X;
     UINT32 Y;
-    UINT32 Color;
+    COLOR Color;
 } PIXEL;
 
 typedef struct {
     POINT Start;
     POINT End;
-    UINT32 Color;
+    COLOR Color;
 } BLOCK;
 
 #pragma pack()
@@ -59,10 +59,14 @@ UINT32 getPixel(POINT Pixel);
 int drawBlock(BLOCK Block);
 
 //int drawLetter(UINT8 c, POINT dest);
-int drawLetter(character c, POINT dest);
+int drawLetter(character c, POINT dest, UINT32 textColor, boolean haveBackground, UINT32 backgroundColor);
 
 boolean drawMousePointer(POINT point);
 
 UINT32 *getAsciiStart();
+
+UINT64 getAsciiHexStart();
+
+COLOR argbToRgb(UINT32 alpha, COLOR baseColor, COLOR backgroundColor);
 
 #endif

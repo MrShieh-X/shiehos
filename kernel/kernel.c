@@ -10,12 +10,34 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     //initMemory(bootConfig);
     initStringConverter();
 
-    POINT inAscii= getPosition('a');
-    UINT32 *ascii = getAsciiStart() + 11 * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + 4;
-    printlnInt(*ascii);
+    /*POINT inAscii= getPosition('a');
+    UINT64 ascii = getAsciiHexStart() *//*+ 11 * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + 4*//*;
+    printlnFraction(((double)getValue(ascii,2590,1)/(double)0xff),5);*/
+
+
+    /*UINT32 baseRed = baseColor >> 16 & 0xFF;
+    UINT32 baseGreen = baseColor >> 8 & 0xFF;
+    UINT32 baseBlue = baseColor & 0xFF;
+    UINT32 backRed = backgroundColor >> 16 & 0xFF;
+    UINT32 backGreen = backgroundColor >> 8 & 0xFF;
+    UINT32 backBlue = backgroundColor & 0xFF;
+    printlnIntRadix(((COLOR) (((double)baseRed + (double)backRed) * transparency)) * 0x10000 +
+                    (COLOR) (((double)baseGreen + (double)backGreen) * transparency) * 0x100 +
+                    (COLOR) (((double)baseBlue + (double)backBlue) * transparency),16);*/
+
+    /*for (UINT64 i = getAsciiHexStart() + 2603; i < getAsciiHexStart() + 6009; i++) {
+        printIntRadix(getValue(i,0,1)/255.0,16);
+        print('/');
+    }*/
+    printIntRadix((UINT32)(0.13*((double)213)),16);
+
+    POINT inAscii = getPosition('a');
+    printlnInt(inAscii.X);
+    printlnInt(inAscii.Y);
+
     {
         BLOCK block;
-        block.Color = 0xaaff0000;
+        block.Color = argbToRgb(0x7f, 0xff0000, 0x0078d7);
         block.Start.X = 180;
         block.Start.Y = 180;
         block.End.X = 280;
@@ -133,15 +155,15 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
 
 
     char a[5];
-    a[0]='b';
-    a[1]='%';
-    a[2]='d';
-    a[3]='e';
-    a[4]='\0';
+    a[0] = 'b';
+    a[1] = '%';
+    a[2] = 'd';
+    a[3] = 'e';
+    a[4] = '\0';
     UINT64 address[1];
-    int A=24;
-    address[0]=(UINT64)(&(A));
-    printfln(a,address,1);
+    int A = 24;
+    address[0] = (UINT64) (&(A));
+    printfln(a, address, 1);
 
     /*p233.X=600;
     setCursor(p233);*/

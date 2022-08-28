@@ -5,6 +5,7 @@ UINT32 *videoStart;
 
 BMPConfig *AsciiBmp;
 UINT32 *AsciiStart;
+UINT64 AsciiHexStart;
 
 POINT cursorNow;
 long backups/*[125]*/[CURSOR_HEIGHT][CURSOR_WIDTH];
@@ -15,6 +16,8 @@ int initVideo(BootConfig *bootConfig) {
 
     AsciiBmp = (bootConfig->AsciiBmp);
     AsciiStart = (UINT32 *) bootConfig->AsciiBmp->PixelStart;
+    AsciiHexStart = bootConfig->asciiHexAddress;
+
 
     BLOCK BackGround;
 
@@ -77,13 +80,17 @@ int drawBlock(BLOCK Block) {
     return 0;
 }
 
-int drawLetter(character c, POINT dest) {
+int drawLetter(character c, POINT dest, UINT32 textColor, boolean haveBackground, UINT32 backgroundColor) {
     POINT inAscii = getPosition(c);
     //UINTN startAscii = asciiStart + (inAscii.Y - 1) * PIC_WIDTH + inAscii.X;
     //UINTN startVideo = videoStart + (dest.Y - 1) * videoConfig->HorizontalResolution + dest.X;
-    for (int y = 0; y < LETTER_HEIGHT; y++) {
-        for (int x = 0; x < LETTER_WIDTH; x++) {
+    for (UINT32 y = 0; y < LETTER_HEIGHT; y++) {
+        for (UINT32 x = 0; x < LETTER_WIDTH; x++) {
             //找到当前ascii和video的point就好办了
+
+            UINT32 alpha = getValue(
+                    AsciiHexStart + (inAscii.Y + y) * PIC_WIDTH + inAscii.X + x, 0, 1);
+
 
             UINT32 *ascii = AsciiStart + y * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + x;
 
@@ -108,11 +115,39 @@ int drawLetter(character c, POINT dest) {
                         videoStart + dest.Y * videoConfig->HorizontalResolution +
                         y * videoConfig->HorizontalResolution +
                         dest.X + x;
-                *video = *ascii;
+
+                if (alpha > 0) {
+                    COLOR color = argbToRgb(alpha,
+                                            textColor, haveBackground ? backgroundColor : *video);
+                    *video = color;
+                } else if (haveBackground) {
+                    *video = backgroundColor;
+                }
             }
         }
     }
     return 0;
+}
+
+
+COLOR argbToRgb(UINT32 alphaHex, COLOR baseColor, COLOR backgroundColor) {
+    if (alphaHex == 255) {
+        return baseColor;
+    }/*else if (alphaHex == 0) {
+        return -1;
+    }*/ else {
+        double transparency = (double) alphaHex / (double) 0xff;
+        UINT32 baseRed = baseColor >> 16 & 0xFF;
+        UINT32 baseGreen = baseColor >> 8 & 0xFF;
+        UINT32 baseBlue = baseColor & 0xFF;
+        UINT32 backRed = backgroundColor >> 16 & 0xFF;
+        UINT32 backGreen = backgroundColor >> 8 & 0xFF;
+        UINT32 backBlue = backgroundColor & 0xFF;
+
+        return ((COLOR) (((double) baseRed* transparency) + ((double) backRed) *(1-transparency))) * 0x10000 +
+               (COLOR) (((double) baseGreen* transparency) + ((double) backGreen) *(1-transparency)) * 0x100 +
+               (COLOR) (((double) baseBlue* transparency) + ((double) backBlue) *(1-transparency));
+    }
 }
 
 /*int drawLetter(UINT8 Ascii, POINT Destination)
@@ -365,6 +400,10 @@ boolean drawMousePointer(POINT point) {
     return true;
 }
 
-UINT32 *getAsciiStart(){
+UINT32 *getAsciiStart() {
     return AsciiStart;
+}
+
+UINT64 getAsciiHexStart() {
+    return AsciiHexStart;
 }

@@ -6,6 +6,7 @@
 #include "../shell/shell.h"
 #include "../memory/xmemory.h"
 #include "../utils/color.h"
+#include "../utils/memory_utils.h"
 #include "../video/cursor.h"
 
 //int drawPixel(UINT32 *VideoHandle, UINT32 Color, int X, int Y, UINT64 horizontal);

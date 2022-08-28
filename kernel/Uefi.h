@@ -11,6 +11,7 @@ typedef long long SUINT64;//MAX: 9,223,372,036,854,775,807;9223372036854775807
 typedef UINT64 UINTN;
 typedef UINT64 EFI_PHYSICAL_ADDRESS;
 typedef UINT64 EFI_VIRTUAL_ADDRESS;
+typedef UINT32 COLOR;
 
 #define NULL ((VOID *) 0)
 
@@ -103,6 +104,7 @@ typedef struct {
     VideoConfig videoConfig;
     BMPConfig *AsciiBmp;
     MEMORY_MAP memoryMap;
+    UINT64 asciiHexAddress;
 } BootConfig;
 
 #pragma pack()
