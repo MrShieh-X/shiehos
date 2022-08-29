@@ -3,8 +3,6 @@
 VideoConfig *videoConfig;
 UINT32 *videoStart;
 
-BMPConfig *AsciiBmp;
-UINT32 *AsciiStart;
 UINT64 AsciiHexStart;
 
 POINT cursorNow;
@@ -14,8 +12,6 @@ int initVideo(BootConfig *bootConfig) {
     videoConfig = &bootConfig->videoConfig;
     videoStart = (UINT32 *) bootConfig->videoConfig.FrameBufferBase;
 
-    AsciiBmp = (bootConfig->AsciiBmp);
-    AsciiStart = (UINT32 *) bootConfig->AsciiBmp->PixelStart;
     AsciiHexStart = bootConfig->asciiHexAddress;
 
 
@@ -88,11 +84,7 @@ int drawLetter(character c, POINT dest, UINT32 textColor, boolean haveBackground
         for (UINT32 x = 0; x < LETTER_WIDTH; x++) {
             //找到当前ascii和video的point就好办了
 
-            UINT32 alpha = getValue(
-                    AsciiHexStart + (inAscii.Y + y) * PIC_WIDTH + inAscii.X + x, 0, 1);
-
-
-            UINT32 *ascii = AsciiStart + y * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + x;
+            UINT32 alpha = getValue(AsciiHexStart, (inAscii.Y + y) * PIC_WIDTH + inAscii.X + x, 1);
 
 
             UINT32 x2 = dest.X + x;
@@ -106,9 +98,13 @@ int drawLetter(character c, POINT dest, UINT32 textColor, boolean haveBackground
                             videoStart + dest.Y * videoConfig->HorizontalResolution +
                             y * videoConfig->HorizontalResolution +
                             dest.X + x;
-                    *video = *ascii;
+                    COLOR color = argbToRgb(alpha,
+                                            textColor, haveBackground ? backgroundColor : *video);
+                    *video = color;
                 } else {
-                    backups[offsetY][offsetX] = *ascii;
+                    COLOR color = argbToRgb(alpha,
+                                            textColor, haveBackground ? backgroundColor : backups[offsetY][offsetX]);
+                    backups[offsetY][offsetX] = color;
                 }
             } else {
                 UINT32 *video =
@@ -144,9 +140,9 @@ COLOR argbToRgb(UINT32 alphaHex, COLOR baseColor, COLOR backgroundColor) {
         UINT32 backGreen = backgroundColor >> 8 & 0xFF;
         UINT32 backBlue = backgroundColor & 0xFF;
 
-        return ((COLOR) (((double) baseRed* transparency) + ((double) backRed) *(1-transparency))) * 0x10000 +
-               (COLOR) (((double) baseGreen* transparency) + ((double) backGreen) *(1-transparency)) * 0x100 +
-               (COLOR) (((double) baseBlue* transparency) + ((double) backBlue) *(1-transparency));
+        return ((COLOR) (((double) baseRed * transparency) + ((double) backRed) * (1 - transparency))) * 0x10000 +
+               (COLOR) (((double) baseGreen * transparency) + ((double) backGreen) * (1 - transparency)) * 0x100 +
+               (COLOR) (((double) baseBlue * transparency) + ((double) backBlue) * (1 - transparency));
     }
 }
 
@@ -398,10 +394,6 @@ boolean drawMousePointer(POINT point) {
 
 
     return true;
-}
-
-UINT32 *getAsciiStart() {
-    return AsciiStart;
 }
 
 UINT64 getAsciiHexStart() {

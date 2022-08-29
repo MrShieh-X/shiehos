@@ -90,7 +90,7 @@ int drawTitle(UINT32 width, UINT32 height) {
         POINT p;
         p.X = x + LETTER_WIDTH * i;
         p.Y = y;
-        drawLetter(c, p,0xffffff,false,0);
+        drawLetter(c, p, 0xffffff, true, 0);
     }
     return 0;
 }

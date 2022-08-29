@@ -6,21 +6,47 @@ import java.io.IOException;
 
 public class AsciiExecutor {
     public static void main(String[] args) throws IOException {
-        getPicArrayData("D:\\AdministratorDocuments\\Virtual Machines\\Ubuntu21.04\\share\\edk2\\ShiehOS\\ascii_nobackground.png");
+        getPicArrayData("D:\\AdministratorDocuments\\Virtual Machines\\Ubuntu21.04\\share\\edk2\\ShiehOS\\resources\\ascii\\ascii_nobackground.png");
     }
 
     public static void getPicArrayData(String path) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         BufferedImage bimg = ImageIO.read(new File(path));
         for (int y = 0; y < bimg.getHeight(); y++) {
-        for (int x = 0; x < bimg.getWidth(); x++) {
-                //输出一列数据比对
-                String format = String.format("%x", bimg.getRGB(x, y));
-                stringBuilder.append(format.length()==8?format.substring(0,2):"00");
+            for (int x = 0; x < bimg.getWidth(); x++) {
+                int rgbInt = bimg.getRGB(x, y);
+                String format = String.format("%x", rgbInt);
+                String alpha = format.length() == 8 ? format.substring(0, 2) : "00";
+                if (y >= 75 && y <= 104 && x >= 621 && x <= 638) {
+                    //if(format.length()==8){
+                    //It must be eight digit (with transparency)
+
+                    if ("ffffff".equals(format.substring(2))) {
+                        stringBuilder.append(alpha);
+                    } else if ("000000".equals(format.substring(2))) {
+                        stringBuilder.append("00");
+                    } else {
+                        String s = calculateAlphaOfLastChar(format.substring(2));
+                        stringBuilder.append(s);
+                        //System.out.println(s);
+                    }
+
+                    //}
+
+                } else {
+                    stringBuilder.append(alpha);
+                }
             }
         }
         System.out.println(stringBuilder);
         hexWrite(stringBuilder.toString(), new File("ascii.hex"));
+    }
+
+    public static String calculateAlphaOfLastChar(String sixDigitColor) {
+        int color = Integer.parseInt(sixDigitColor, 16);
+        //(colorRed-0xff)/0xff
+        String s = Integer.toString(0xff - (int) (((double) 0xffffff - (double) color) / (double) 0xffffff * 255.0), 16);
+        return s.length() == 1 ? "0" + s : s;
     }
 
 

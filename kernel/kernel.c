@@ -10,30 +10,10 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     //initMemory(bootConfig);
     initStringConverter();
 
-    /*POINT inAscii= getPosition('a');
-    UINT64 ascii = getAsciiHexStart() *//*+ 11 * PIC_WIDTH + inAscii.Y * PIC_WIDTH + inAscii.X + 4*//*;
-    printlnFraction(((double)getValue(ascii,2590,1)/(double)0xff),5);*/
+    for (int i = 32; i < 130; i++) {
+        print(i);
+    }
 
-
-    /*UINT32 baseRed = baseColor >> 16 & 0xFF;
-    UINT32 baseGreen = baseColor >> 8 & 0xFF;
-    UINT32 baseBlue = baseColor & 0xFF;
-    UINT32 backRed = backgroundColor >> 16 & 0xFF;
-    UINT32 backGreen = backgroundColor >> 8 & 0xFF;
-    UINT32 backBlue = backgroundColor & 0xFF;
-    printlnIntRadix(((COLOR) (((double)baseRed + (double)backRed) * transparency)) * 0x10000 +
-                    (COLOR) (((double)baseGreen + (double)backGreen) * transparency) * 0x100 +
-                    (COLOR) (((double)baseBlue + (double)backBlue) * transparency),16);*/
-
-    /*for (UINT64 i = getAsciiHexStart() + 2603; i < getAsciiHexStart() + 6009; i++) {
-        printIntRadix(getValue(i,0,1)/255.0,16);
-        print('/');
-    }*/
-    printIntRadix((UINT32)(0.13*((double)213)),16);
-
-    POINT inAscii = getPosition('a');
-    printlnInt(inAscii.X);
-    printlnInt(inAscii.Y);
 
     {
         BLOCK block;

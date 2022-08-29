@@ -63,8 +63,6 @@ int drawLetter(character c, POINT dest, UINT32 textColor, boolean haveBackground
 
 boolean drawMousePointer(POINT point);
 
-UINT32 *getAsciiStart();
-
 UINT64 getAsciiHexStart();
 
 COLOR argbToRgb(UINT32 alpha, COLOR baseColor, COLOR backgroundColor);

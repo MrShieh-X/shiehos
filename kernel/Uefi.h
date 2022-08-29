@@ -102,7 +102,6 @@ typedef struct {
 
 typedef struct {
     VideoConfig videoConfig;
-    BMPConfig *AsciiBmp;
     MEMORY_MAP memoryMap;
     UINT64 asciiHexAddress;
 } BootConfig;
