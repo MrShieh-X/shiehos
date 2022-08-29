@@ -53,3 +53,6 @@ asm: asms/asmfuncs.asm Makefile
 
 kernel :
 	$(MAKE) kernel.elf
+
+clean:
+	-rm -rf $(OUTPUT_DIRECTORY)
