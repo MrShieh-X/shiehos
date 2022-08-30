@@ -2,6 +2,7 @@ MAKE                 = make -r
 OUTPUT_DIRECTORY     = build
 OUTPUT_ELF           = $(OUTPUT_DIRECTORY)/kernel.elf
 KERNEL_ENTRY_POINT   = kernelStart
+OS_VERSION           = 1
 
 default :
 	$(MAKE) kernel.elf
@@ -42,6 +43,7 @@ $(OUTPUT_DIRECTORY)/asms/asmfuncs.o
           video/cursor.c \
           $(OUTPUT_DIRECTORY)/asms/asmfuncs.o \
           -nostdlib -e $(KERNEL_ENTRY_POINT) -o $(OUTPUT_ELF)
+	java project_tools.SignWriter $(OUTPUT_ELF) $(OS_VERSION)
 
 $(OUTPUT_DIRECTORY)/asms/asmfuncs.o: asms/asmfuncs.asm Makefile
 	-mkdir $(OUTPUT_DIRECTORY)
