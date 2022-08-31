@@ -1,5 +1,8 @@
 SECTION .TEXT
-	GLOBAL say_hi
+	GLOBAL hlt
+	GLOBAL cli
+	GLOBAL sti
+	GLOBAL nop
 
 ; 1st：rdi
 ; 2nd：rsi
@@ -12,6 +15,18 @@ SECTION .TEXT
 ; 9th：[esp+24]
 ; 10th：[esp+32]
 ; 11th：[esp+40]
-say_hi:
-    mov rax,[esp+56]
+hlt:
+    hlt
+    ret
+
+cli:
+    cli
+    ret
+
+sti:
+    sti
+    ret
+
+nop:
+    nop
     ret

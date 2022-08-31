@@ -1,6 +1,5 @@
 #include "memory_utils.h"
 
-//貌似有问题
 UINTN getValue(
         EFI_PHYSICAL_ADDRESS StartAddress,
         UINTN Offset,

@@ -1,7 +1,5 @@
 #include "kernel.h"
 
-int say_hi(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13);
-
 _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     //UINT64 PassBack = 0;
     initVideo(bootConfig);
@@ -9,11 +7,6 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     initPrinter(bootConfig);
     //initMemory(bootConfig);
     initStringConverter();
-
-    for (int i = 32; i < 130; i++) {
-        print(i);
-    }
-
 
     {
         BLOCK block;
@@ -26,7 +19,7 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     }
 
 
-    POINT p233;
+    /*POINT p233;
     p233.X = 200;
     p233.Y = 200;
 
@@ -143,27 +136,9 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     UINT64 address[1];
     int A = 24;
     address[0] = (UINT64) (&(A));
-    printfln(a, address, 1);
+    printfln(a, address, 1);*/
 
-    /*p233.X=600;
-    setCursor(p233);*/
-
-    /*POINT p;
-    p.X =200;
-    p.Y =200;*/
-
-/*
-
-    for(int i=0;i<19;i++){
-        for(int j=0;j<12;j++){
-            printInt(backups[i][j]);
-            print(' ');
-        }
-        newLine();
-    }
-*/
-
-
+    //hlt();
 
     while (1) { ; }
 

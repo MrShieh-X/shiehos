@@ -293,12 +293,19 @@ boolean print(character c) {
             return true;
         } else return false;
     } else {
-        POINT point;
-        point = nextPosition();
-        if (point.X == -1 || point.Y == -1) {
-            return false;
+        if (c == '\t') {
+            return print(' ') |
+                   print(' ') |
+                   print(' ') |
+                   print(' ');
+        } else {
+            POINT point;
+            point = nextPosition();
+            if (point.X == -1 || point.Y == -1) {
+                return false;
+            }
+            drawLetter(c, point, 0xffffff, true, 0);
         }
-        drawLetter(c, point, 0xffffff, true, 0);
         return true;
     }
 }
