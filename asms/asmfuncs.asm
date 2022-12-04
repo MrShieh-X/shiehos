@@ -16,6 +16,7 @@ SECTION .TEXT
 ; 10th：[esp+32]
 ; 11th：[esp+40]
 hlt:
+    mov rax,50000
     hlt
     ret
 

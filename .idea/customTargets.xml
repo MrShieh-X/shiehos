@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="d544ef8a-ee7c-41fd-89f3-d70d7d4054fd" name="BuildKernel" defaultType="TOOL">
+      <configuration id="2ab4cdc1-981b-49c1-badc-4778a54d8d3c" name="BuildKernel" toolchainName="MinGW">
+        <build type="TOOL">
+          <tool actionId="Tool_External Tools_build" />
+        </build>
+        <clean type="TOOL">
+          <tool actionId="Tool_External Tools_clean" />
+        </clean>
+      </configuration>
+    </target>
+  </component>
+</project>

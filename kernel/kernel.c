@@ -19,7 +19,7 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     }
 
 
-    /*POINT p233;
+    POINT p233;
     p233.X = 200;
     p233.Y = 200;
 
@@ -136,9 +136,9 @@ _Noreturn UINT64 kernelStart(BootConfig *bootConfig) {
     UINT64 address[1];
     int A = 24;
     address[0] = (UINT64) (&(A));
-    printfln(a, address, 1);*/
+    printfln(a, address, 1);
 
-    //hlt();
+    hlt();
 
     while (1) { ; }
 

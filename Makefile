@@ -7,6 +7,9 @@ OS_VERSION           = 1
 default :
 	$(MAKE) kernel.elf
 
+all :
+	$(MAKE) kernel.elf
+
 kernel.elf : Makefile \
 kernel/kernel.c \
 memory/xmemory.c \
@@ -43,7 +46,7 @@ $(OUTPUT_DIRECTORY)/asms/asmfuncs.o
           video/cursor.c \
           $(OUTPUT_DIRECTORY)/asms/asmfuncs.o \
           -nostdlib -e $(KERNEL_ENTRY_POINT) -o $(OUTPUT_ELF)
-	java project_tools.SignWriter $(OUTPUT_ELF) $(OS_VERSION)
+	#-java project_tools.SignWriter $(OUTPUT_ELF) $(OS_VERSION)
 
 $(OUTPUT_DIRECTORY)/asms/asmfuncs.o: asms/asmfuncs.asm Makefile
 	-mkdir $(OUTPUT_DIRECTORY)
@@ -58,3 +61,4 @@ kernel :
 
 clean:
 	-rm -rf $(OUTPUT_DIRECTORY)
+	-del /f /q /s $(OUTPUT_DIRECTORY)

@@ -1,0 +1,1 @@
+D:\Programs\qemu\qemu-system-x86_64.exe -monitor stdio -bios "D:\AdministratorDocuments\Virtual Machines\Ubuntu21.04\share\edk2\Build\OvmfX64\DEBUG_GCC5\FV\OVMF.fd" -net none -hda fat:rw:G:
