@@ -8,9 +8,9 @@
   </tool>
   <tool name="build" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
-      <option name="COMMAND" value="D:\AdministratorDocuments\Projects\edk2-master\ShiehOS\build.bat" />
+      <option name="COMMAND" value="D:\AdministratorDocuments\Projects\ShiehOS\build.bat" />
       <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="D:/AdministratorDocuments/Projects/edk2-master/ShiehOS" />
+      <option name="WORKING_DIRECTORY" value="D:/AdministratorDocuments/Projects/ShiehOS" />
     </exec>
   </tool>
 </toolSet>
