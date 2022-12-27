@@ -8,8 +8,8 @@
   </tool>
   <tool name="build" showInMainMenu="false" showInEditor="false" showInProject="false" showInSearchPopup="false" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
     <exec>
-      <option name="COMMAND" value="D:\AdministratorDocuments\Projects\ShiehOS\build.bat" />
-      <option name="PARAMETERS" />
+      <option name="COMMAND" value="D:\AdministratorDocuments\Projects\ShiehOS\project_tools\execute.exe" />
+      <option name="PARAMETERS" value="&quot;ssh mrshiehx@192.168.0.108 \&quot;cd /mnt/hgfs/share/edk2/ShiehOS;make\&quot;&quot; &quot;java project_tools.SignWriter build/kernel.elf 1&quot; cpefi" />
       <option name="WORKING_DIRECTORY" value="D:/AdministratorDocuments/Projects/ShiehOS" />
     </exec>
   </tool>
